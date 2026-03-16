@@ -9,6 +9,8 @@ $^{1}$**Columbia University** &nbsp;&nbsp;&nbsp;&nbsp; $^{2}$**Seoul National Un
 
 </div>
 
+[![project_page](https://img.shields.io/badge/-project%20page-skyblue)](https://jp4327.github.io/adaradar/)
+
 This repository contains the evaluation code for the following paper: AdaRadar: Rate Adaptive Spectral Compression for Radar-based Perception
 
 <img src="docs/static/images/abstract.png" alt="overview" width="700"/>
