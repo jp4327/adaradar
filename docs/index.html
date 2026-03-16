@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="AdaRadar: Rate Adaptive Spectral Compression for Radar-based Perception.">
+  <meta name="keywords" content="Compression, Object Detection, Radar Perception, Segmentation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdaRadar: Rate Adaptive Spectral Compression for Radar-based Perception</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0GKCVC54HB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-0GKCVC54HB');
+  </script>
+
+  <!-- LaTeX math -->
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({            
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+      });
+    </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">AdaRadar: <br> Rate Adaptive Spectral Compression for Radar-based
+              Perception
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=vkWRJIAAAAAJ&hl=en" target="_blank">Jinho
+                  Park</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=3jLuG64AAAAJ&hl=en" target="_blank">Se Young
+                  Chun</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=OPECx0sAAAAJ&hl=en" target="_blank">Mingoo
+                  Seok</a><sup>1</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Columbia University,</span>
+              <span class="author-block"><sup>2</sup>Seoul National University</span>
+              <br>
+              <span class="author-block"><strong>CVPR 2026</strong></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/jp4327/adaradar"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-paperclip"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/jp4327/adaradar"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=Wbu-nBEaFcI"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span> -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/jp4327/adaradar"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- sec : abtsract -->
+  <section class="colored-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Radar is a critical perception modality in autonomous driving systems due to its all-weather
+              characteristics and ability
+              to measure range and Doppler velocity. However, the sheer volume of high-dimensional raw radar data
+              saturates the
+              communication link to the computing engine (e.g., an NPU), which is often a low-bandwidth interface with
+              data rate
+              provisioned only for a few low-resolution range-Doppler frames. A generalized codec for utilizing
+              high-dimensional radar
+              data is notably absent, while existing image-domain approaches are unsuitable, as they typically operate
+              at fixed
+              compression ratios and fail to adapt to varying or adversarial conditions. In light of this, we propose
+              radar data
+              compression with adaptive feedback. It dynamically adjusts the compression ratio by performing gradient
+              descent from the
+              proxy gradient of detection confidence with respect to the compression rate. We employ a zeroth-order
+              gradient
+              approximation as it enables gradient computation even with non-differentiable core operations--pruning and
+              quantization.
+              This also avoids transmitting the gradient tensors over the band-limited link, which, if estimated, would
+              be as large as
+              the original radar data. In addition, we have found that radar feature maps are heavily concentrated on a
+              few frequency
+              components. Thus, we apply the discrete cosine transform to the radar data cubes and selectively prune out
+              the
+              coefficients effectively. We preserve the dynamic range of each radar patch through scaled quantization.
+              Combining those
+              techniques, our proposed online adaptive compression scheme achieves over 100x feature size reduction at
+              minimal
+              performance drop (~1%p). We validate our results on the RADIal, CARRADA, and Radatron datasets.
+            </p>
+          </div>
+          </p>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+  <section class="section"></section>
+  <div class="container is-max-widescreen">
+
+    <div class="rows">
+
+      <style>
+        .centered-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .interpolation-image {
+          display: block;
+          margin: 20px 0;
+          /* Give some space above and below the image */
+        }
+      </style>
+
+      <!-- sec : proposed method -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Proposed Method</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/proposed.png" class="interpolation-image" alt="overall pipeline"
+                style="width: 80%;" />
+            </div>
+            <p style="text-align:justify">
+              Our proposed method introduces a feedback loop in which the proxy gradient is computed from the detection
+              outputs to
+              update the compression ratio adaptively. This avoids the need for backpropagation through the
+              communication channel. The
+              radar tensor is compressed using DCT, adaptive spectral pruning, and scaled quantization, then transmitted
+              to the
+              compute side. In an object-detection setting, the neural network produces detection results from
+              decompressed radar data
+              cubes. The loop uses proposed bounding boxes to estimate the proxy gradient, thereby updating the pruning
+              rate.
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
+      <!-- sec : Bandwith Bottleneck in Radar Systems -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Bandwith Bottleneck in Radar Systems</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/overview.png" class="interpolation-image" alt="overall pipeline"
+                style="width: 45%;" />
+            </div>
+            <p style="text-align:justify">
+              An FMCW radar transmits linearly swept‑frequency chirps. The incoming echo is mixed with a copy of the
+              transmitted chirp
+              at the receiver, yielding a de‑chirped intermediate‑frequency signal that the ADC digitizes to form a raw
+              radar tensor.
+              Successive FFTs along the fast‑time and slow‑time axes convert this tensor into a range–Doppler cube. The
+              large, raw
+              radar tensor is transferred to the NPU over the power-hungry sensor-to-compute link for network inference.
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
+      <!-- sec : Motivation for Spectral Pruning and Quantization -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Motivation for Spectral Pruning and Quantization</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/DCT_coeff.png" class="interpolation-image" alt="relationship map generation"
+                style="width: 50%;" />
+            </div>
+            <p style="text-align:justify">
+              Figure (a) shows the distribution of the DCT coefficients from the raw radar tensor, computed
+              block-wise with $M=64$.
+              Here, we calculate the average coefficient magnitude $\mathbb{E}_{c,b}\big[|\boldsymbol{z}_{c,b}|\big]$
+              over all
+              channels $c$ and blocks $b$.
+              This reveals a strong concentration of energy in the high-frequency bins, highlighting the opportunity for
+              aggressive
+              pruning.
+              Figure (b) presents the histogram of these coefficients, wherein its pronounced peak near zero
+              highlights the potential for quantization.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
+      <!-- sec : Motivation for Surrogate Objective Choice -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Motivation for Surrogate Objective Choice</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/mAP_mAR_bar.png" class="interpolation-image" alt="relationship map generation"
+                style="width: 50%;" />
+            </div>
+            <p style="text-align:justify">
+              The figure reveals a strong positive correlation between bounding-box confidence and object-detection
+              performance, thereby justifying the use of confidence as a surrogate objective when optimizing detection
+              accuracy.
+              In the RADIal dataset, precision and recall are evaluated at discrete confidence thresholds from 0.1
+              to 0.9.
+              This thresholding scheme explains the staircase-like correlation that appears in the results.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
+
+
+      <!-- sec : Table: Compression on RADIal -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Compression on RADIal</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/table_radial.png" class="interpolation-image" alt="relationship map generation"
+                style="width: 70%;" />
+            </div>
+            <p style="text-align:justify">
+              We compare the detection and segmentation performance of adaptive rate control with prior work on the
+              RADIal <em>test</em> set using FFTRadNet as the backbone. Our adaptive rate control achieves 101x
+              compression on
+              average while maintaining the performance close to the baseline. 'P' and 'R' respectively stand for
+              precision and
+              recall. We highlight in bold the best-performing result among methods other than the baseline.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
+      <!-- sec : Rate-accuracy Tradeoff -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Rate-accuracy Tradeoff</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/RA_tradeoff.png" class="interpolation-image" alt="relationship map generation"
+                style="width: 50%;" />
+            </div>
+            <p style="text-align:justify">
+              This illustrates the trade-off between the bit rate and the detection performance metrics: AP and
+              AR.
+              While it depicts the obvious rate-accuracy tradeoff, our compression scheme achieves a 100x reduction in
+              the
+              radar feature map size while incurring a ~1%p decrease in performance compared to FFTRadNet.
+              Compared with Pixor, our method achieves higher precision and markedly higher recall.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
+      <!-- sec : Online adaptation -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Online Adaptation</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/time_series.png" class="interpolation-image" alt="relationship map generation"
+                style="width: 50%;" />
+            </div>
+            <p style="text-align:justify">
+              The online adaptation adjusts the bit rate based on the confidence gradient.
+              The figure above illustrates this scheme, where the pruning ratio is increased from the initial starting
+              point.
+              The bit rate fluctuates over time, though it surges at some points.
+              Here, it is expected that the controller decreases the pruning ratio to compensate for the AR drop.
+              It achieves an average bit rate of 0.279 bpp with 8-bit quantization, yielding a 115x
+              compression with AR of 93.91%.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
+      <!-- sec : Qualitative comparisons -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Qualitative Comparisons</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/qual.png" class="interpolation-image" alt="relationship map generation"
+                style="width: 90%;" />
+            </div>
+            <p style="text-align:justify">
+              Networks are trained on raw radar tensors, visualized as range-Doppler (RD) images, along with
+              ground-truth labels for
+              freeway segmentation and vehicle detection. Camera images only provide contextual reference for the scene.
+              RD images map
+              Range to the $y$-axis and Doppler to the $x$-axis. We highlight the detected car in
+              <span style="color: red;">red</span> and the segmented map in <span style="color: green;">green</span> in
+              the bird's-eye-view visualization. Notably, the compressed RD outperforms the uncompressed baseline.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
+      <!--BibTex citation -->
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>@inproceedings{park2026adaradar,
+      title={AdaRadar: Rate Adaptive Spectral Compression for Radar-based Perception},
+      author={Park, Jinho and Chun, Se Young and Seok, Mingoo},
+      booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+      year={2026},
+      }</code></pre>
+        </div>
+      </section>
+      <!--End BibTex citation -->
+
+      <footer class="footer">
+        <!-- <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="./static/videos/nerfies_paper.pdf">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div> -->
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This website is licensed under a <a rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                  Commons Attribution-ShareAlike 4.0 International License</a>.
+              </p>
+              <p>
+                This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source
+                  code</a> of this website,
+                we just ask that you link back to this page in the footer.
+              </p>
+            </div>
+          </div>
+        </div>
+    </div>
+    </footer>
+
+</body>
+
+</html>
