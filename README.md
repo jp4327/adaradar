@@ -3,9 +3,9 @@
 
 # AdaRadar: Adaptive Radar Data Compression (CVPR 2026)
 
-[Jinho Park](https://scholar.google.com/citations?user=vkWRJIAAAAAJ&hl=en)$^{1}$ &nbsp;&nbsp;&nbsp; [Se Young Chun](https://scholar.google.com/citations?user=3jLuG64AAAAJ&hl=en)$^{2}$ &nbsp;&nbsp;&nbsp; [Mingoo Seok](https://scholar.google.com/citations?user=OPECx0sAAAAJ&hl=en)$^{1}$
+[Jinho Park](https://scholar.google.com/citations?user=vkWRJIAAAAAJ&hl=en)<sup>1</sup> &nbsp;&nbsp;&nbsp; [Se Young Chun](https://scholar.google.com/citations?user=3jLuG64AAAAJ&hl=en)<sup>2</sup> &nbsp;&nbsp;&nbsp; [Mingoo Seok](https://scholar.google.com/citations?user=OPECx0sAAAAJ&hl=en)<sup>1</sup>
 
-$^{1}$**Columbia University** &nbsp;&nbsp;&nbsp;&nbsp; $^{2}$**Seoul National University**
+<sup>1</sup>**Columbia University** &nbsp;&nbsp;&nbsp;&nbsp; <sup>2</sup>**Seoul National University**
 
 </div>
 
