@@ -1,7 +1,7 @@
 
 <div align="center">
 
-# 📶 AdaRadar: Adaptive Radar Data Compression (CVPR 2026)
+# 📶 AdaRadar: Rate Adaptive Spectral Compression for Radar-based Perception <br> **CVPR 2026**
 
 [Jinho Park](https://scholar.google.com/citations?user=vkWRJIAAAAAJ&hl=en)<sup>1</sup> &nbsp;&nbsp;&nbsp; 
 [Se Young Chun](https://scholar.google.com/citations?user=3jLuG64AAAAJ&hl=en)<sup>2</sup> &nbsp;&nbsp;&nbsp; 
