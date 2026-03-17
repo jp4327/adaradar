@@ -386,6 +386,59 @@
       </section>
       <br><br><br>
 
+      <!-- sec : Qualitative visualization on range-Doppler map -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Qualitative visualization on range-Doppler map</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/qual_SNR.png" class="interpolation-image" alt="relationship map generation"
+                style="width: 80%;" />
+            </div>
+            <p style="text-align:justify">
+              (a) Original and (b) reconstructed RD map for a single channel with 8-bit quantization and a pruning ratio
+              of 1.
+              (c)-(f) Magnified 64x64 patches at pruning ratios of $\{1,5,10,20\}$, respectively.
+              (g) SNR vs. bit rate trade-off.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
+      <!-- sec : Effect of quantization bit width and block length $M$ on RADIal -->
+      <section>
+        <div class="rows">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Effect of quantization bit width and block length $M$ on RADIal</h2>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/RAtrade_quant_RADIal.png" class="interpolation-image"
+                alt="relationship map generation" style="width: 80%;" />
+            </div>
+            <div class="columns is-vcentered is-centered">
+              <br>
+              <img src="./static/images/RAtrade_BL_RADIal.png" class="interpolation-image"
+                alt="relationship map generation" style="width: 80%;" />
+            </div>
+            <p style="text-align:justify">
+              (a) Average precision, (b) average
+              recall, and (c) F<sub>1</sub> score against the bit rate modulation from
+              pruning.
+              (Above) We observe that quantization up to 4 bits does not affect the performance compared to that of
+              8-bit and 16-bit. We use
+              the FFTRadNet on the RADIal dataset without any fine-tuning with the block length $M=64$ for all
+              cases.
+              (Below) We observe that compression with a larger block length generally performs better. We use the
+              FFTRadNet on the RADIal
+              dataset without any fine-tuning with 4-bit quantization for all cases.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br><br><br>
+
       <!--BibTex citation -->
       <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
