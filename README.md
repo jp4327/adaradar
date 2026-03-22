@@ -12,9 +12,13 @@
 
 </div>
 
+<a href="https://arxiv.org/abs/2603.17979"><img src="https://img.shields.io/badge/Paper-arXiv:2409.13106-Green"></a>
 [![project_page](https://img.shields.io/badge/-project%20page-skyblue)](https://jp4327.github.io/adaradar/)
 
-This repository contains the evaluation code for the following paper: AdaRadar: Rate Adaptive Spectral Compression for Radar-based Perception
+This repository contains the evaluation code for the following paper: 
+
+[**AdaRadar: Rate Adaptive Spectral Compression for Radar-based Perception**](https://arxiv.org/abs/2603.17979)
+
 
 <img src="docs/static/images/abstract.png" alt="overview" width="700"/>
 
