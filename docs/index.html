@@ -193,25 +193,30 @@
 
       <!-- sec : proposed method -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Proposed Method</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/proposed.png" class="interpolation-image" alt="overall pipeline"
-                style="width: 80%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Proposed Method</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/proposed.png" class="interpolation-image" alt="overall pipeline"
+                  style="width: 100%;" />
+              </div>
+              <p style="text-align:justify">
+                Our proposed method introduces a feedback loop in which the proxy gradient is computed from the
+                detection
+                outputs to
+                update the compression ratio adaptively. This avoids the need for backpropagation through the
+                communication channel. The
+                radar tensor is compressed using DCT, adaptive spectral pruning, and scaled quantization, then
+                transmitted
+                to the
+                compute side. In an object-detection setting, the neural network produces detection results from
+                decompressed radar data
+                cubes. The loop uses proposed bounding boxes to estimate the proxy gradient, thereby updating the
+                pruning
+                rate.
             </div>
-            <p style="text-align:justify">
-              Our proposed method introduces a feedback loop in which the proxy gradient is computed from the detection
-              outputs to
-              update the compression ratio adaptively. This avoids the need for backpropagation through the
-              communication channel. The
-              radar tensor is compressed using DCT, adaptive spectral pruning, and scaled quantization, then transmitted
-              to the
-              compute side. In an object-detection setting, the neural network produces detection results from
-              decompressed radar data
-              cubes. The loop uses proposed bounding boxes to estimate the proxy gradient, thereby updating the pruning
-              rate.
           </div>
         </div>
       </section>
@@ -219,22 +224,27 @@
 
       <!-- sec : Bandwith Bottleneck in Radar Systems -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Bandwith Bottleneck in Radar Systems</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/overview.png" class="interpolation-image" alt="overall pipeline"
-                style="width: 45%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Bandwith Bottleneck in Radar Systems</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/overview.png" class="interpolation-image" alt="overall pipeline"
+                  style="width: 70%;" />
+              </div>
+              <p style="text-align:justify">
+                An FMCW radar transmits linearly swept‑frequency chirps. The incoming echo is mixed with a copy of the
+                transmitted chirp
+                at the receiver, yielding a de‑chirped intermediate‑frequency signal that the ADC digitizes to form a
+                raw
+                radar tensor.
+                Successive FFTs along the fast‑time and slow‑time axes convert this tensor into a range–Doppler cube.
+                The
+                large, raw
+                radar tensor is transferred to the NPU over the power-hungry sensor-to-compute link for network
+                inference.
             </div>
-            <p style="text-align:justify">
-              An FMCW radar transmits linearly swept‑frequency chirps. The incoming echo is mixed with a copy of the
-              transmitted chirp
-              at the receiver, yielding a de‑chirped intermediate‑frequency signal that the ADC digitizes to form a raw
-              radar tensor.
-              Successive FFTs along the fast‑time and slow‑time axes convert this tensor into a range–Doppler cube. The
-              large, raw
-              radar tensor is transferred to the NPU over the power-hungry sensor-to-compute link for network inference.
           </div>
         </div>
       </section>
@@ -242,26 +252,29 @@
 
       <!-- sec : Motivation for Spectral Pruning and Quantization -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Motivation for Spectral Pruning and Quantization</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/DCT_coeff.png" class="interpolation-image" alt="relationship map generation"
-                style="width: 50%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Motivation for Spectral Pruning and Quantization</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/DCT_coeff.png" class="interpolation-image" alt="relationship map generation"
+                  style="width: 70%;" />
+              </div>
+              <p style="text-align:justify">
+                Figure (a) shows the distribution of the DCT coefficients from the raw radar tensor, computed
+                block-wise with $M=64$.
+                Here, we calculate the average coefficient magnitude $\mathbb{E}_{c,b}\big[|\boldsymbol{z}_{c,b}|\big]$
+                over all
+                channels $c$ and blocks $b$.
+                This reveals a strong concentration of energy in the high-frequency bins, highlighting the opportunity
+                for
+                aggressive
+                pruning.
+                Figure (b) presents the histogram of these coefficients, wherein its pronounced peak near zero
+                highlights the potential for quantization.
+              </p>
             </div>
-            <p style="text-align:justify">
-              Figure (a) shows the distribution of the DCT coefficients from the raw radar tensor, computed
-              block-wise with $M=64$.
-              Here, we calculate the average coefficient magnitude $\mathbb{E}_{c,b}\big[|\boldsymbol{z}_{c,b}|\big]$
-              over all
-              channels $c$ and blocks $b$.
-              This reveals a strong concentration of energy in the high-frequency bins, highlighting the opportunity for
-              aggressive
-              pruning.
-              Figure (b) presents the histogram of these coefficients, wherein its pronounced peak near zero
-              highlights the potential for quantization.
-            </p>
           </div>
         </div>
       </section>
@@ -269,22 +282,24 @@
 
       <!-- sec : Motivation for Surrogate Objective Choice -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Motivation for Surrogate Objective Choice</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/mAP_mAR_bar.png" class="interpolation-image" alt="relationship map generation"
-                style="width: 50%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Motivation for Surrogate Objective Choice</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/mAP_mAR_bar.png" class="interpolation-image" alt="relationship map generation"
+                  style="width: 70%;" />
+              </div>
+              <p style="text-align:justify">
+                The figure reveals a strong positive correlation between bounding-box confidence and object-detection
+                performance, thereby justifying the use of confidence as a surrogate objective when optimizing detection
+                accuracy.
+                In the RADIal dataset, precision and recall are evaluated at discrete confidence thresholds from 0.1
+                to 0.9.
+                This thresholding scheme explains the staircase-like correlation that appears in the results.
+              </p>
             </div>
-            <p style="text-align:justify">
-              The figure reveals a strong positive correlation between bounding-box confidence and object-detection
-              performance, thereby justifying the use of confidence as a surrogate objective when optimizing detection
-              accuracy.
-              In the RADIal dataset, precision and recall are evaluated at discrete confidence thresholds from 0.1
-              to 0.9.
-              This thresholding scheme explains the staircase-like correlation that appears in the results.
-            </p>
           </div>
         </div>
       </section>
@@ -294,22 +309,24 @@
 
       <!-- sec : Table: Compression on RADIal -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Compression on RADIal</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/table_radial.png" class="interpolation-image" alt="relationship map generation"
-                style="width: 70%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Compression on RADIal</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/table_radial.png" class="interpolation-image"
+                  alt="relationship map generation" style="width: 100%;" />
+              </div>
+              <p style="text-align:justify">
+                We compare the detection and segmentation performance of adaptive rate control with prior work on the
+                RADIal <em>test</em> set using FFTRadNet as the backbone. Our adaptive rate control achieves 101x
+                compression on
+                average while maintaining the performance close to the baseline. 'P' and 'R' respectively stand for
+                precision and
+                recall. We highlight in bold the best-performing result among methods other than the baseline.
+              </p>
             </div>
-            <p style="text-align:justify">
-              We compare the detection and segmentation performance of adaptive rate control with prior work on the
-              RADIal <em>test</em> set using FFTRadNet as the backbone. Our adaptive rate control achieves 101x
-              compression on
-              average while maintaining the performance close to the baseline. 'P' and 'R' respectively stand for
-              precision and
-              recall. We highlight in bold the best-performing result among methods other than the baseline.
-            </p>
           </div>
         </div>
       </section>
@@ -317,22 +334,24 @@
 
       <!-- sec : Rate-accuracy Tradeoff -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Rate-accuracy Tradeoff</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/RA_tradeoff.png" class="interpolation-image" alt="relationship map generation"
-                style="width: 50%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Rate-accuracy Tradeoff</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/RA_tradeoff.png" class="interpolation-image" alt="relationship map generation"
+                  style="width: 70%;" />
+              </div>
+              <p style="text-align:justify">
+                This illustrates the trade-off between the bit rate and the detection performance metrics: AP and
+                AR.
+                While it depicts the obvious rate-accuracy tradeoff, our compression scheme achieves a 100x reduction in
+                the
+                radar feature map size while incurring a ~1%p decrease in performance compared to FFTRadNet.
+                Compared with Pixor, our method achieves higher precision and markedly higher recall.
+              </p>
             </div>
-            <p style="text-align:justify">
-              This illustrates the trade-off between the bit rate and the detection performance metrics: AP and
-              AR.
-              While it depicts the obvious rate-accuracy tradeoff, our compression scheme achieves a 100x reduction in
-              the
-              radar feature map size while incurring a ~1%p decrease in performance compared to FFTRadNet.
-              Compared with Pixor, our method achieves higher precision and markedly higher recall.
-            </p>
           </div>
         </div>
       </section>
@@ -340,23 +359,25 @@
 
       <!-- sec : Online adaptation -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Online Adaptation</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/time_series.png" class="interpolation-image" alt="relationship map generation"
-                style="width: 50%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Online Adaptation</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/time_series.png" class="interpolation-image" alt="relationship map generation"
+                  style="width: 60%;" />
+              </div>
+              <p style="text-align:justify">
+                The online adaptation adjusts the bit rate based on the confidence gradient.
+                The figure above illustrates this scheme, where the pruning ratio is increased from the initial starting
+                point.
+                The bit rate fluctuates over time, though it surges at some points.
+                Here, it is expected that the controller decreases the pruning ratio to compensate for the AR drop.
+                It achieves an average bit rate of 0.279 bpp with 8-bit quantization, yielding a 115x
+                compression with AR of 93.91%.
+              </p>
             </div>
-            <p style="text-align:justify">
-              The online adaptation adjusts the bit rate based on the confidence gradient.
-              The figure above illustrates this scheme, where the pruning ratio is increased from the initial starting
-              point.
-              The bit rate fluctuates over time, though it surges at some points.
-              Here, it is expected that the controller decreases the pruning ratio to compensate for the AR drop.
-              It achieves an average bit rate of 0.279 bpp with 8-bit quantization, yielding a 115x
-              compression with AR of 93.91%.
-            </p>
           </div>
         </div>
       </section>
@@ -364,23 +385,27 @@
 
       <!-- sec : Qualitative comparisons -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Qualitative Comparisons</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/qual.png" class="interpolation-image" alt="relationship map generation"
-                style="width: 90%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Qualitative Comparisons</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/qual.png" class="interpolation-image" alt="relationship map generation"
+                  style="width: 100%;" />
+              </div>
+              <p style="text-align:justify">
+                Networks are trained on raw radar tensors, visualized as range-Doppler (RD) images, along with
+                ground-truth labels for
+                freeway segmentation and vehicle detection. Camera images only provide contextual reference for the
+                scene.
+                RD images map
+                Range to the $y$-axis and Doppler to the $x$-axis. We highlight the detected car in
+                <span style="color: red;">red</span> and the segmented map in <span style="color: green;">green</span>
+                in
+                the bird's-eye-view visualization. Notably, the compressed RD outperforms the uncompressed baseline.
+              </p>
             </div>
-            <p style="text-align:justify">
-              Networks are trained on raw radar tensors, visualized as range-Doppler (RD) images, along with
-              ground-truth labels for
-              freeway segmentation and vehicle detection. Camera images only provide contextual reference for the scene.
-              RD images map
-              Range to the $y$-axis and Doppler to the $x$-axis. We highlight the detected car in
-              <span style="color: red;">red</span> and the segmented map in <span style="color: green;">green</span> in
-              the bird's-eye-view visualization. Notably, the compressed RD outperforms the uncompressed baseline.
-            </p>
           </div>
         </div>
       </section>
@@ -388,20 +413,23 @@
 
       <!-- sec : Qualitative visualization on range-Doppler map -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Qualitative visualization on range-Doppler map</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/qual_SNR.png" class="interpolation-image" alt="relationship map generation"
-                style="width: 80%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Qualitative visualization on range-Doppler map</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/qual_SNR.png" class="interpolation-image" alt="relationship map generation"
+                  style="width: 100%;" />
+              </div>
+              <p style="text-align:justify">
+                (a) Original and (b) reconstructed RD map for a single channel with 8-bit quantization and a pruning
+                ratio
+                of 1.
+                (c)-(f) Magnified 64x64 patches at pruning ratios of $\{1,5,10,20\}$, respectively.
+                (g) SNR vs. bit rate trade-off.
+              </p>
             </div>
-            <p style="text-align:justify">
-              (a) Original and (b) reconstructed RD map for a single channel with 8-bit quantization and a pruning ratio
-              of 1.
-              (c)-(f) Magnified 64x64 patches at pruning ratios of $\{1,5,10,20\}$, respectively.
-              (g) SNR vs. bit rate trade-off.
-            </p>
           </div>
         </div>
       </section>
@@ -409,31 +437,33 @@
 
       <!-- sec : Effect of quantization bit width and block length $M$ on RADIal -->
       <section>
-        <div class="rows">
-          <div class="row is-full-width">
-            <h2 class="title is-3">Effect of quantization bit width and block length $M$ on RADIal</h2>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/RAtrade_quant_RADIal.png" class="interpolation-image"
-                alt="relationship map generation" style="width: 80%;" />
+        <div class="container is-max-desktop">
+          <div class="rows">
+            <div class="row is-full-width">
+              <h2 class="title is-3">Effect of quantization bit width and block length $M$ on RADIal</h2>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/RAtrade_quant_RADIal.png" class="interpolation-image"
+                  alt="relationship map generation" style="width: 100%;" />
+              </div>
+              <div class="columns is-vcentered is-centered">
+                <br>
+                <img src="./static/images/RAtrade_BL_RADIal.png" class="interpolation-image"
+                  alt="relationship map generation" style="width: 100%;" />
+              </div>
+              <p style="text-align:justify">
+                (a) Average precision, (b) average
+                recall, and (c) F<sub>1</sub> score against the bit rate modulation from
+                pruning.
+                (Above) We observe that quantization up to 4 bits does not affect the performance compared to that of
+                8-bit and 16-bit. We use
+                the FFTRadNet on the RADIal dataset without any fine-tuning with the block length $M=64$ for all
+                cases.
+                (Below) We observe that compression with a larger block length generally performs better. We use the
+                FFTRadNet on the RADIal
+                dataset without any fine-tuning with 4-bit quantization for all cases.
+              </p>
             </div>
-            <div class="columns is-vcentered is-centered">
-              <br>
-              <img src="./static/images/RAtrade_BL_RADIal.png" class="interpolation-image"
-                alt="relationship map generation" style="width: 80%;" />
-            </div>
-            <p style="text-align:justify">
-              (a) Average precision, (b) average
-              recall, and (c) F<sub>1</sub> score against the bit rate modulation from
-              pruning.
-              (Above) We observe that quantization up to 4 bits does not affect the performance compared to that of
-              8-bit and 16-bit. We use
-              the FFTRadNet on the RADIal dataset without any fine-tuning with the block length $M=64$ for all
-              cases.
-              (Below) We observe that compression with a larger block length generally performs better. We use the
-              FFTRadNet on the RADIal
-              dataset without any fine-tuning with 4-bit quantization for all cases.
-            </p>
           </div>
         </div>
       </section>
